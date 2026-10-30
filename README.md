@@ -32,9 +32,10 @@ Les flows communiquent via le réseau Docker partagé `strava_network`.
 
 ```bash
 # 1. Copier et remplir les fichiers .env
-cp flow_01_Strava/.env.example flow_01_Strava/.env
-cp flow_01_PowerBI/.env.example flow_01_PowerBI/.env
-cp dockerCompose_Kestra/.env.example dockerCompose_Kestra/.env
+cp flow_01_Strava/.envExemple flow_01_Strava/.env
+cp flow_01_PowerBI/.envExemple flow_01_PowerBI/.env
+cp flow_01_Slack/.envExemple flow_01_Slack/.env
+cp dockerCompose_Kestra/.envExemple dockerCompose_Kestra/.env
 
 # 2. Démarrer dans l'ordre
 cd flow_01_Strava && docker-compose up -d
@@ -47,8 +48,10 @@ Kestra est accessible sur **http://localhost:8080**
 
 ## Documentation
 
-Voir [data/Documentation_Technique_Avantages_Sportifs.docx](data/Documentation_Technique_Avantages_Sportifs.docx) pour la documentation technique complète (~10 pages).
+Voir [Documentation_Technique_Avantages_Sportifs.pdf](Documentation_Technique_Avantages_Sportifs.pdf) pour la documentation technique complète (~10 pages).
 
 ## Sécurité
 
 Les fichiers `.env` sont exclus du git via `.gitignore`. Ne jamais committer de credentials.
+
+La webapp ASP.NET lit le Client ID / Secret Strava et la chaîne de connexion depuis les variables d'environnement injectées par `docker-compose` (`STRAVA_CLIENT_ID`, `STRAVA_CLIENT_SECRET`, `SQL_PASSWORD` du `.env`). En développement local hors Docker, utiliser `dotnet user-secrets`.
